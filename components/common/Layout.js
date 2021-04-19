@@ -11,7 +11,7 @@ import LoadingWidget from "./LoadingWidget";
 // set up handle preview
 const isPreview = handlePreview();
 
-function Layout({props, locales}) {
+function Layout(props) {
   const {
     page,
     sitemapNode,
@@ -52,7 +52,7 @@ function Layout({props, locales}) {
           <div id="site">
             <PreviewBar {...props} />
             <div className="flex flex-col min-h-screen">
-              <SiteHeader {...props} locales={locales} />
+              <SiteHeader {...props} />
               <main className="flex-grow">
                 <AgilityPageTemplate {...props} />
               </main>
