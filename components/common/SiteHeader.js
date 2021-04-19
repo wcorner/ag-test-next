@@ -1,15 +1,21 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from 'next/router'
 
 const SiteHeader = ({ globalData, sitemapNode, page }) => {
   // get header data
   const { header } = globalData;
+
+  const router = useRouter()
 
   // open / close mobile nav
   const [open, setOpen] = useState(false);
 
   // set up href for internal links
   let href = "/pages/[...slug]";
+  let current = router.asPath
+
+  console.log(current);
 
   if (!header) {
     return (
@@ -62,6 +68,7 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
               </svg>
             </button>
           </div>
+
           <nav className="hidden md:flex space-x-10">
             {header.links.map((navitem, index) => {
               return (
@@ -72,6 +79,8 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
                 </Link>
               );
             })}
+            <Link href={{ pathname: current}} locale={'de-de'}>German</Link>
+            <Link href={{ pathname: current}} locale={'en-us'}>English</Link>
           </nav>
         </div>
       </div>

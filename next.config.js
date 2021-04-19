@@ -12,4 +12,26 @@ module.exports = {
 	future: {
 		webpack5: true
 	},
+
+	i18n: {
+		// These are all the locales you want to support in
+		// your application
+		locales: ['en-us', 'de-de'],
+		// This is the default locale you want to be used when visiting
+		// a non-locale prefixed path e.g. `/hello`
+		defaultLocale: 'en-us',
+	},
+
+	webpack: (config, { dev, isServer }) => {
+		// Replace React with Preact only in client production build
+		if (!dev && !isServer) {
+			Object.assign(config.resolve.alias, {
+				react: 'preact/compat',
+				'react-dom/test-utils': 'preact/test-utils',
+				'react-dom': 'preact/compat',
+			});
+		}
+
+		return config;
+	},
 };

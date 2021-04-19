@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion"
 
 const TextBlockWithImage = ({ module }) => {
   // get module fields
@@ -42,7 +43,7 @@ const TextBlockWithImage = ({ module }) => {
   return (
     <div className="relative px-8">
       <div className="flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24 items-center">
-        <div className="md:w-6/12 flex-shrink-0 relative">
+        <motion.div className="md:w-6/12 flex-shrink-0 relative" whileHover={{ scale: 1.1 }}>
           {fields.primaryButton ? (
             <Link href={href} as={fields.primaryButton.href}>
               <Image
@@ -62,7 +63,7 @@ const TextBlockWithImage = ({ module }) => {
               className="rounded-lg object-cover object-center"
             />
           )}
-        </div>
+        </motion.div>
         <div
           className={`md:w-6/12 mt-16 md:mt-0 ${
             fields.imagePosition != "right"
