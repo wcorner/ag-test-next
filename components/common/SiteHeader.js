@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from 'next/router'
 
-const SiteHeader = ({ globalData, sitemapNode, page, locales }) => {
+const SiteHeader = ({ globalData, sitemapNode, page }) => {
   // get header data
   const { header } = globalData;
 
@@ -15,7 +15,7 @@ const SiteHeader = ({ globalData, sitemapNode, page, locales }) => {
   let href = "/pages/[...slug]";
   let current = router.asPath
 
-  console.log(locales);
+  console.log(current);
 
   if (!header) {
     return (
@@ -79,9 +79,6 @@ const SiteHeader = ({ globalData, sitemapNode, page, locales }) => {
                 </Link>
               );
             })}
-            <h1></h1>
-            <Link href={{ pathname: current}} locale={'de-de'}>German</Link>
-            <Link href={{ pathname: current}} locale={'en-us'}>English</Link>
           </nav>
         </div>
       </div>
