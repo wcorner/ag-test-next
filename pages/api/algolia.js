@@ -4,7 +4,7 @@ const client = algoliasearch(process.env.ALGOLIA_APP_ID, process.env.ALGOLIA_API
 const algoliaHandler = async (req, res) => {
     const index = client.initIndex("posts")
 
-    const { payload } = req.body
+    const { payload, state } = req.body
     const { pageID: objectID, ...post } = payload
 
     if (["Published"].includes(state)) {
