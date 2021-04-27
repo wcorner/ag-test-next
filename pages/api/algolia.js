@@ -1,5 +1,5 @@
 import algoliasearch from "algoliasearch"
-const client = algoliasearch("L53C3Z5689", "7a3e86c395c7607693964f84cd1c9766")
+const client = algoliasearch(process.env.ALGOLIA_APP_ID, process.env.ALGOLIA_API_KEY)
 
 const algoliaHandler = async (req, res) => {
     const index = client.initIndex("posts")
