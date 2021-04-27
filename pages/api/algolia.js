@@ -4,22 +4,16 @@ const client = algoliasearch(process.env.ALGOLIA_APP_ID, process.env.ALGOLIA_API
 const algoliaHandler = async (req, res) => {
     const index = client.initIndex("posts")
 
-    const { event, payload } = req.body
-    const [_, eventType] = event.split(".")
-    const { id: objectID, ...post } = payload
+    const { payload } = req.body
+    const { pageID: objectID, ...post } = payload
 
-    if (eventType === "delete") {
-        await index.deleteObject(objectID)
-        return res.status(202).end()
-    }
-
-    if (["create", "update"].includes(eventType)) {
+    if (["Published"].includes(state)) {
         await index.saveObject({ objectID, ...post })
         return res.status(200).send({ success: true })
     }
 
     res.send({
-        message: `Event type ${eventType} is not a valid trigger`,
+        message: `${state} is not a valid trigger`,
     })
 }
 
