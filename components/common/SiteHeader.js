@@ -1,21 +1,15 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import { useRouter } from 'next/router'
 
 const SiteHeader = ({ globalData, sitemapNode, page }) => {
   // get header data
   const { header } = globalData;
-
-  const router = useRouter()
 
   // open / close mobile nav
   const [open, setOpen] = useState(false);
 
   // set up href for internal links
   let href = "/pages/[...slug]";
-  let current = router.asPath
-
-  console.log(current);
 
   if (!header) {
     return (

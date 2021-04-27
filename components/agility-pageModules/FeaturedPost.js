@@ -49,7 +49,7 @@ const FeaturedPost = ({ module }) => {
           <Link href={href} as={`/blog/${featuredPost.fields.slug}`}>
             <a className="cursor-pointer">
               <div className="font-display uppercase text-primary-500 text-xs font-bold tracking-widest leading-loose after:content">
-                {featuredPost.fields.category ? featuredPost.fields.category.fields.title : ''}
+                {featuredPost.fields.category?.fields.title || ''}
               </div>
               <div className="border-b-2 border-primary-500 w-8"></div>
               <div className="mt-4 uppercase text-gray-600 italic font-semibold text-xs">

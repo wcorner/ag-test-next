@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@agility/content-sync": "^0.1.24",
+    "algoliasearch": "^4.9.1",
     "framer-motion": "^4.1.4",
     "next": "^10.1.3",
     "react": "17.0.1",

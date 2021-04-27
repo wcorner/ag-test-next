@@ -27,6 +27,9 @@ const PostsListing = ({ module, customData }) => {
 
   return (
     <div className="relative px-8 mb-12">
+
+
+
       <div className="max-w-screen-xl mx-auto">
         <div className="sm:grid sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {posts.map((post, index) => (
@@ -111,7 +114,7 @@ PostsListing.getCustomInitialProps = async ({
       const categoryID = post.fields.category?.contentid;
 
       // find category
-      const category = categories?.find((c) => c.contentID == categoryID);
+      const category = categories?.find((c) => c.contentID === categoryID);
 
       // date
       const date = new Date(post.fields.date).toLocaleDateString();
