@@ -2,7 +2,7 @@ import React from "react";
 
 const RelatedPosts = ({customData, dynamicPageItem}) => {
 
-    const { posts } = customData;
+    const {posts} = customData;
     const current = dynamicPageItem
 
     const relatedPosts = posts.filter((p) => {
