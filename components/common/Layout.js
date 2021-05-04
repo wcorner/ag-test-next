@@ -12,7 +12,7 @@ import SiteExtra from "./SiteExtra";
 // set up handle preview
 const isPreview = handlePreview();
 
-function Layout({agilityProps, locales}) {
+function Layout(agilityProps) {
   const {
     page,
     sitemapNode,

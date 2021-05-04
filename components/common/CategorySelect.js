@@ -9,7 +9,7 @@ const CategorySelect = ({ categories, onChange }) => {
     return (
         <select name="" id="" onChange={filterPosts}>
             <option value="all">All Posts</option>
-            {categories.map((category, index) => (
+            {categories && categories.map((category, index) => (
                 <option key={index} value={category.contentID}>{category.fields.title}</option>
             ))}
         </select>

@@ -6,7 +6,7 @@ const RelatedPosts = ({customData, dynamicPageItem}) => {
     const current = dynamicPageItem
 
     const relatedPosts = posts.filter((p) => {
-        return p.categoryID === current.fields?.category.contentID
+        return p.categoryID === current.fields.category?.contentID
     })
 
     return (

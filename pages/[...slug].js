@@ -33,7 +33,7 @@ export async function getStaticProps({
 
   return {
     // return all props
-    props: { agilityProps, locales },
+    props: agilityProps,
 
     // Next.js will attempt to re-generate the page when a request comes in, at most once every 10 seconds
     // Read more on Incremental Static Regeneration here: https://nextjs.org/docs/basic-features/data-fetching#incremental-static-regeneration
