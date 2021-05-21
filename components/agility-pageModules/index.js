@@ -3,6 +3,8 @@ import FeaturedPost from "./FeaturedPost";
 import PostsListing from "./PostsListing";
 import RelatedPosts from "./RelatedPosts";
 import PostDetails from "./PostDetails";
+import Carousel from "./Carousel";
+import ContactForm from "./ContactForm";
 import Heading from "./Heading";
 import TextBlockWithImage from "./TextBlockWithImage";
 
@@ -12,6 +14,8 @@ import TextBlockWithImage from "./TextBlockWithImage";
 const allModules = [
   { name: "TextBlockWithImage", module: TextBlockWithImage },
   { name: "Heading", module: Heading },
+  { name: "Carousel", module: Carousel },
+  { name: "ContactForm", module: ContactForm },
   { name: "FeaturedPost", module: FeaturedPost },
   { name: "PostsListing", module: PostsListing },
   { name: "PostDetails", module: PostDetails },

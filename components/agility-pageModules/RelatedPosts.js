@@ -31,7 +31,7 @@ RelatedPosts.getCustomInitialProps = async function ({agility, channelName, lang
         languageCode,
         take: 50,
         skip: 0,
-        sort: 'fields.title',
+        sort: 'properties.modified',
     });
 
     // get categories...
