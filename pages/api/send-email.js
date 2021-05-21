@@ -22,13 +22,13 @@ async function sendEmail({ name, email, message }) {
 
 export default async function handler(req, res) {
 
-    if(req.mentod === 'POST') {
+    if(req.method === 'POST') {
         const emailRes = await sendEmail(req.body);
         if (emailRes.messageId) {
             return res.status(200).json({message: `Email sent successfully`});
         }
 
-        return res.staus(400).json({message: 'Error sending email'});
+        return res.status(400).json({message: 'Error sending email'});
     }
 
     return res.status(400).json({message: `Incorrect method: ${req.method}. Did you mean POST?`});

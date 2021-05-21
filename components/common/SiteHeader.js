@@ -9,7 +9,7 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
   const [open, setOpen] = useState(false);
 
   // set up href for internal links
-  let href = "/pages/[...slug]";
+  let href = "[...slug]";
 
   if (!header) {
     return (
@@ -66,6 +66,7 @@ const SiteHeader = ({ globalData, sitemapNode, page }) => {
           <nav className="hidden md:flex space-x-10">
             {header.links.map((navitem, index) => {
               return (
+
                 <Link href={href} key={`mobile-${index}`} as={navitem.path}>
                   <a className="text-base leading-6 font-medium text-secondary-500 hover:text-primary-500 border-transparent border-b-2 hover:border-primary-500 hover:border-b-primary hover:border-b-2 focus:outline-none focus:text-primary-500 transition duration-300">
                     {navitem.title}
