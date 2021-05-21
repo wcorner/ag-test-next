@@ -39,7 +39,7 @@ const ContactForm = ({dynamicPageItem}) => {
             toast.success('Message Submitted');
             return setAsyncStatus(('resolved'));
         }
-        toast.error('Error Sending Message');
+        toast.error(`Error Sending Message: ${res.status}`);
         return setAsyncStatus('rejected');
     }
 
