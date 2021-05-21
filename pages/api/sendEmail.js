@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
 
 async function sendEmail({ name, email, message }) {
     const emailOptions = {
-        from: 'Grit Agility Test <test@example.com>',
+        from: `Grit Agility Test <test@example.com>`,
         to: `${name} - ${email}`,
         subject: 'Demo Email',
         html: `<h1>Message as follows:</h1> ${message}`
@@ -21,11 +21,10 @@ async function sendEmail({ name, email, message }) {
 }
 
 export default async function handler(req, res) {
-
-    if(req.method === 'POST') {
+    if (req.method === 'POST') {
         const emailRes = await sendEmail(req.body);
         if (emailRes.messageId) {
-            return res.status(200).json({message: `Email sent successfully`});
+            return res.status(200).json({message: `Email sent successfuly`});
         }
 
         return res.status(400).json({message: 'Error sending email'});

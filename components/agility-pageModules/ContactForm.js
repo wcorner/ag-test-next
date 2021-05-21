@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ContactForm = ({dynamicPageItem}) => {
 
@@ -34,14 +36,16 @@ const ContactForm = ({dynamicPageItem}) => {
 
         if (res.status === 200) {
             setFormValues({name: '', email: '', message: ''});
+            toast.success('Message Submitted');
             return setAsyncStatus(('resolved'));
         }
-
+        toast.error('Error Sending Message');
         return setAsyncStatus('rejected');
     }
 
     return (
         <div className="relative px-8">
+            <ToastContainer />
             <header className="sub-form__header">
             <span className="form-title">
                 {asyncStatus === 'idle' && 'Send a message'}
