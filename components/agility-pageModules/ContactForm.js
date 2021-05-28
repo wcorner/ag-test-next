@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import kwesforms from 'kwesforms';
+import Newsletter from "../common/Newsletter";
 
 const ContactForm = ({dynamicPageItem}) => {
 
@@ -18,6 +20,10 @@ const ContactForm = ({dynamicPageItem}) => {
             }, 2000);
         }
     },[asyncStatus]);
+
+    useEffect(() => {
+        kwesforms.init();
+    });
 
     function handleChange(el) {
         setFormValues({ ...formValues, [el.target.name]: el.target.value});
@@ -46,6 +52,19 @@ const ContactForm = ({dynamicPageItem}) => {
     return (
         <div className="relative px-8">
             <ToastContainer />
+
+            <h1>Newsletter</h1>
+            <Newsletter />
+
+            <h1>Kwes Form</h1>
+            <form className="kwes-form" action="https://kwes.io/api/foreign/forms/bX0v4wYsK6yc84zoFIp1">
+                <label htmlFor="name">Your Name</label>
+                <input type="text" name="name" rules="required|max:255" />
+                <button type="submit">Submit</button>
+            </form>
+
+
+            <h1>Nodemailer</h1>
             <header className="sub-form__header">
             <span className="form-title">
                 {asyncStatus === 'idle' && 'Send a message'}

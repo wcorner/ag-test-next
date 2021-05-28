@@ -18,6 +18,7 @@ async function sendEmail({ name, email, message }) {
     }
 
     return transporter.sendMail((emailOptions));
+
 }
 
 export default async function handler(req, res) {
