@@ -28,7 +28,7 @@ const Newsletter = () => {
 
             let headers = new Headers();
             headers.append('Content-Type', 'application/json');
-            headers.append('Authorization', 'Basic ' + username + ":" + password);
+            headers.append('Authorization', 'Basic ' + btoa(username + ":" + password));
 
             const res = await fetch('https://apiv3.emailsys.net/recipients', {
                     mode: 'no-cors',
