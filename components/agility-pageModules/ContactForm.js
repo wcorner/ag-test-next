@@ -3,6 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import kwesforms from 'kwesforms';
 import Newsletter from "../common/Newsletter";
+import FormikForm from "./FormikForm";
 
 const ContactForm = ({dynamicPageItem}) => {
 
@@ -52,6 +53,8 @@ const ContactForm = ({dynamicPageItem}) => {
     return (
         <div className="relative px-8">
             <ToastContainer />
+
+            <FormikForm />
 
             <h1>Newsletter</h1>
             <Newsletter />

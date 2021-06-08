@@ -52,14 +52,12 @@ const Newsletter = () => {
         }
 
         return (
-            <>
-                <form method="post" onSubmit={handleSubmit}>
-                    <input type="text" name="firstname" id="firstname" placeholder="First name" onChange={handleChange}/>
-                    <input type="text" name="lastname" id="lastname" placeholder="Last name" onChange={handleChange}/>
-                    <input type="text" name="email" id="email" placeholder="Email" onChange={handleChange}/>
-                    <button type="submit">Subscribe</button>
-                </form>
-            </>
+            <form method="post" onSubmit={handleSubmit}>
+                <input type="text" name="firstname" id="firstname" placeholder="First name" onChange={handleChange}/>
+                <input type="text" name="lastname" id="lastname" placeholder="Last name" onChange={handleChange}/>
+                <input type="text" name="email" id="email" placeholder="Email" onChange={handleChange}/>
+                <button type="submit">Subscribe</button>
+            </form>
         );
 
     }

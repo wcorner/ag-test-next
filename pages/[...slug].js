@@ -2,7 +2,6 @@ import Layout from "components/common/Layout";
 import { getAgilityPageProps, getAgilityPaths } from "@agility/nextjs/node";
 import { getModule } from "components/agility-pageModules";
 import SiteHeader from "components/common/SiteHeader";
-import SiteExtra from "components/common/SiteExtra";
 
 // getStaticProps function fetches data for all of your Agility Pages and Next.js will pre-render these pages at build time
 export async function getStaticProps({

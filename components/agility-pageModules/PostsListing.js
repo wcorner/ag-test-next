@@ -2,23 +2,64 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import CategorySelect from "../common/CategorySelect";
+import { motion, AnimatePresence } from "framer-motion"
 
 const PostsListing = ({module, customData}) => {
     // get posts
-    const {posts, categories} = customData;
+    const {posts, categories, languageCode} = customData;
 
+    let currentPosts = posts.slice(0,2);
     const [filteredPosts, setFilteredPosts] = useState(posts);
+    const [currentFilteredPosts, setCurrentFilteredPosts] = useState(currentPosts);
+    const [currentPage, setCurrentPage] = useState(2);
+
+    if (filteredPosts.length === currentFilteredPosts.length) {
+        console.log('No more posts!');
+    }
 
     function filterPosts(newValue) {
+
+        setCurrentPage(2);
 
         if (newValue !== 'all') {
             let filtered = posts.filter((p) => {
                 return p.categoryID === parseInt(newValue);
             })
             setFilteredPosts(filtered);
+            setCurrentFilteredPosts(filtered.slice(0,currentPage))
         } else {
             setFilteredPosts(posts);
+            setCurrentFilteredPosts(currentPosts);
         }
+
+    }
+
+    Array.prototype.unique = function() {
+        let a = this.concat();
+        for(let i=0; i<a.length; ++i) {
+            for(let j=i+1; j<a.length; ++j) {
+                if(a[i] === a[j])
+                    a.splice(j--, 1);
+            }
+        }
+
+        return a;
+    };
+
+    function fetchPosts() {
+        let morePosts = [];
+
+        if (filteredPosts === posts) {
+            console.log('not filtered');
+            morePosts = posts.slice(currentPage,currentPage+2);
+        } else {
+            console.log('filtered');
+            morePosts = filteredPosts.slice(currentPage,currentPage+2);
+        }
+
+        setCurrentPage(currentPage+2);
+
+        setCurrentFilteredPosts(currentFilteredPosts.concat(morePosts).unique());
 
     }
 
@@ -26,7 +67,7 @@ const PostsListing = ({module, customData}) => {
     let href = "/pages/[...slug]";
 
     // if there are no posts, display message on frontend
-    if (filteredPosts.length <= 0) {
+    if (currentFilteredPosts.length <= 0) {
         return (
             <>
               <CategorySelect categories={categories} onChange={filterPosts} />
@@ -46,13 +87,16 @@ const PostsListing = ({module, customData}) => {
 
     return (
         <>
+            <button onClick={fetchPosts}>Fetch Posts</button>
             <CategorySelect categories={categories} onChange={filterPosts} />
             <div className="relative px-8 mb-12">
                 <div className="max-w-screen-xl mx-auto">
                     <div className="sm:grid sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                        {filteredPosts.map((post, index) => (
+                        <AnimatePresence>
+                        {currentFilteredPosts.map((post, index) => (
+
                             <Link href={href} as={post.url} key={index}>
-                                <a>
+                                <motion.a initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
                                     <div className="flex-col group mb-8 md:mb-0">
                                         <div className="relative h-64">
                                             <Image
@@ -75,9 +119,11 @@ const PostsListing = ({module, customData}) => {
                                             </h2>
                                         </div>
                                     </div>
-                                </a>
+                                </motion.a>
                             </Link>
+
                         ))}
+                        </AnimatePresence>
                     </div>
                 </div>
             </div>
@@ -85,7 +131,7 @@ const PostsListing = ({module, customData}) => {
     );
 };
 
-// function to resole post urls
+// function to resolve post urls
 const resolvePostUrls = function (sitemap, posts) {
     let dynamicUrls = {};
     posts.forEach((post) => {
@@ -111,7 +157,9 @@ PostsListing.getCustomInitialProps = async ({ agility, channelName, languageCode
 
         // get posts...
         let rawPosts = await api.getContentList({
-            referenceName: "posts",
+            referenceName: 'posts',
+            take: 7,
+            skip: 0,
             languageCode,
         });
 
@@ -122,9 +170,9 @@ PostsListing.getCustomInitialProps = async ({ agility, channelName, languageCode
         });
 
         // resolve dynamic urls
-        const dynamicUrls = resolvePostUrls(sitemap, rawPosts);
+        const dynamicUrls = resolvePostUrls(sitemap, rawPosts.items);
 
-        const posts = rawPosts.map((post) => {
+        const cleanPosts = rawPosts.items.map((post) => {
             // categoryID
             const categoryID = post.fields.category?.contentid;
 
@@ -132,7 +180,7 @@ PostsListing.getCustomInitialProps = async ({ agility, channelName, languageCode
             const category = categories?.find((c) => c.contentID === categoryID);
 
             // date
-            const date = new Date(post.fields.date).toLocaleDateString();
+            const date = new Date(post.fields.date).toLocaleDateString(languageCode);
 
             // url
             const url = dynamicUrls[post.contentID] || "#";
@@ -155,14 +203,18 @@ PostsListing.getCustomInitialProps = async ({ agility, channelName, languageCode
             };
         });
 
+        let posts = cleanPosts.sort((a, b) => new Date(a.date) - new Date(b.date));
+
         return {
             posts,
-            categories
+            categories,
+            languageCode
         };
 
     } catch (error) {
         if (console) console.error(error);
     }
+
 };
 
 export default PostsListing;
