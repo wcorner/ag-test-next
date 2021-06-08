@@ -29,9 +29,6 @@ RelatedPosts.getCustomInitialProps = async function ({agility, channelName, lang
     let rawPosts = await api.getContentList({
         referenceName: 'posts',
         languageCode,
-        take: 50,
-        skip: 0,
-        sort: 'properties.modified',
     });
 
     // get categories...
