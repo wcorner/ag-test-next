@@ -9,7 +9,7 @@ const algoliaHandler = async (req, res) => {
     isPreview: false
   });
 
-  const algolia = algoliasearch(process.env.ALGOLIA_APP_ID, process.env.ALGOLIA_API_KEY);
+  const algolia = algoliasearch(process.env.NEXT_PUBLIC_ALGOLIA_APP_ID, process.env.NEXT_PUBLIC_ALGOLIA_API_KEY);
   const index = algolia.initIndex('agility_test')
 
   try {
@@ -46,9 +46,7 @@ const algoliaHandler = async (req, res) => {
 
     let allObjects = cleanPosts.concat(cleanPages);
 
-    const objects = await index.saveObjects(allObjects)
-
-    res.send(objects)
+    await index.saveObjects(allObjects);
 
   } catch (error) {
     if (console) console.error(error);

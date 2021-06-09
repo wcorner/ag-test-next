@@ -1,6 +1,7 @@
-/* 
+/*
 || Global styles & custom css can be written here.
 */
+@import "search.css";
 
 /* Import tailwind base styles */
 @tailwind base;

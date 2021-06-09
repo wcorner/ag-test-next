@@ -158,7 +158,7 @@ PostsListing.getCustomInitialProps = async ({ agility, channelName, languageCode
         // get posts...
         let rawPosts = await api.getContentList({
             referenceName: 'posts',
-            take: 7,
+            take: 100,
             skip: 0,
             languageCode,
         });

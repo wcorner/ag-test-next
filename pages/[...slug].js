@@ -2,6 +2,7 @@ import Layout from "components/common/Layout";
 import { getAgilityPageProps, getAgilityPaths } from "@agility/nextjs/node";
 import { getModule } from "components/agility-pageModules";
 import SiteHeader from "components/common/SiteHeader";
+import algoliaHandler from "./api/algolia"
 
 // getStaticProps function fetches data for all of your Agility Pages and Next.js will pre-render these pages at build time
 export async function getStaticProps({
@@ -29,6 +30,8 @@ export async function getStaticProps({
     // We throw to make sure this fails at build time as this is never expected to happen
     throw new Error(`Page not found`);
   }
+
+  await algoliaHandler();
 
   return {
     // return all props
