@@ -31,7 +31,7 @@ export async function getStaticProps({
     throw new Error(`Page not found`);
   }
 
-  await algoliaHandler();
+  // await algoliaHandler();
 
   return {
     // return all props
