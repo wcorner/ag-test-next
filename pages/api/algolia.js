@@ -3,6 +3,8 @@ import agility from "@agility/content-fetch"
 
 const algoliaHandler = async (req, res) => {
 
+  const payload = req.body;
+
   const api = agility.getApi({
     guid: process.env.AGILITY_GUID,
     apiKey: process.env.AGILITY_API_FETCH_KEY,
@@ -47,6 +49,8 @@ const algoliaHandler = async (req, res) => {
     let allObjects = cleanPosts.concat(cleanPages);
 
     await index.saveObjects(allObjects);
+
+    res.status(200).json({ state: payload.state })
 
   } catch (error) {
     if (console) console.error(error);
